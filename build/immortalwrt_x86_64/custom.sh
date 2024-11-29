@@ -5,10 +5,8 @@
 # sudo -E apt-get -y install rename
 
 # 更新feeds文件
+src-git dbone-packages https://github.com/db-one/dbone-packages.git;23.05
 cat feeds.conf.default
-
-# 添加第三方软件包
-git clone https://github.com/db-one/dbone-packages.git -b 23.05 package/dbone-packages
 
 # 更新并安装源
 ./scripts/feeds clean
@@ -36,13 +34,12 @@ fi
 sed -i 's#192.168.1.1#10.0.0.1#g' $NET                                                     # 定制默认IP
 sed -i 's#ImmortalWrt#ImmortalWrt-X86#g' $NET                                          # 修改默认名称为 ImmortalWrt-X86
 # sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' $ZZZ                                          # 取消系统默认密码
-sed -i "s/ImmortalWrt /ONE build $(TZ=UTC-8 date "+%Y.%m.%d") @ ImmortalWrt /g" $ZZZ              # 增加自己个性名称
 echo "uci set luci.main.mediaurlbase=/luci-static/argon" >> $ZZZ                      # 设置默认主题(如果编译可会自动修改默认主题的，有可能会失效)
 # sed -i 's#localtime  = os.date()#localtime  = os.date("%Y年%m月%d日") .. " " .. translate(os.date("%A")) .. " " .. os.date("%X")#g' package/lean/autocore/files/*/index.htm               # 修改默认时间格式
 
 # ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● #
-sed -i 's#%D %V, %C#%D %V, %C ImmortalWrt_x86_64#g' package/base-files/files/etc/banner               # 自定义banner显示
-# sed -i 's@list listen_https@# list listen_https@g' package/network/services/uhttpd/files/uhttpd.config               # 停止监听443端口
+sed -i 's#%D %V %C#ONE build $(TZ=UTC-8 date "+%Y.%m.%d") @ %D %V %C#g' package/base-files/files/etc/openwrt_release              # 增加自己个性名称
+sed -i 's@list listen_https@# list listen_https@g' package/network/services/uhttpd/files/uhttpd.config               # 停止监听443端口
 # sed -i '/exit 0/i\ethtool -s eth0 speed 2500 duplex full' package/base-files/files//etc/rc.local               # 强制显示2500M和全双工（默认PVE下VirtIO不识别） ImmortalWrt固件内不显示端口状态，可以关闭
 
 # ●●●●●●●●●●●●●●●●●●●●●●●●定制部分●●●●●●●●●●●●●●●●●●●●●●●● #
