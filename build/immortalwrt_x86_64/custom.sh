@@ -245,18 +245,15 @@ CONFIG_PACKAGE_xray-plugin=y
 CONFIG_PACKAGE_shadowsocks-rust-sslocal=y
 EOF
 
-# Turbo ACC 网络加速:
-cat >> .config <<EOF
-
-
-EOF
-
 # 常用LuCI插件:
 cat >> .config <<EOF
-
-
-
-
+CONFIG_PACKAGE_luci-app-accesscontrol=n #上网时间控制
+CONFIG_PACKAGE_luci-app-filetransfer=y #文件传输
+CONFIG_PACKAGE_luci-app-frpc=y #Frpc客户端
+CONFIG_PACKAGE_luci-app-upnp=n #UPNP服务器
+CONFIG_PACKAGE_luci-app-vlmcsd=n #KMS激活服务器
+CONFIG_PACKAGE_luci-app-nlbwmon=n #宽带流量监控
+CONFIG_PACKAGE_luci-app-wol=n #网络唤醒
 #
 # VPN相关插件(禁用):
 #
