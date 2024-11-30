@@ -5,8 +5,10 @@
 # sudo -E apt-get -y install rename
 
 # 更新feeds文件
-echo "src-git dbone-packages https://github.com/db-one/dbone-packages.git;23.05" >> feeds.conf.default
 cat feeds.conf.default
+
+# 添加第三方软件包
+git clone https://github.com/db-one/dbone-packages.git -b 23.05 package/dbone-packages
 
 # 更新并安装源
 # ./scripts/feeds clean
