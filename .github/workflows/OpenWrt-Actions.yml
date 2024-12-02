@@ -41,7 +41,7 @@ env:
   WECHAT_WORK_TOKEN: ${{ secrets.WECHAT_WORK_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-  GITHUB_RELEASE: https://github.com/db-one/Beta-OpenWrt-AutoBuild/releases
+  GITHUB_RELEASE: https://github.com/db-one/ImmortalWrt-AutoBuild-Beta/releases
 
 jobs: 
   build:
@@ -193,6 +193,9 @@ jobs:
     - name: SSH远程连接服务器
       uses: db-one/debugger-action@main
       if: env.SSH_ACTIONS == 'true' || (github.event.inputs.SSH_ACTION == 'true')
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
     - name: 输出编译信息
       run: |
@@ -245,7 +248,7 @@ jobs:
         echo "输出完整插件信息..."
         echo
         echo
-        cat .config
+        # cat .config
 
     - name: 下载编译所需文件
       run: |
@@ -365,7 +368,7 @@ jobs:
       uses: Mattraks/delete-workflow-runs@v2
       with:
         retain_days: 1     #保留最后多少记录不删除
-        keep_minimum_runs: 6
+        keep_minimum_runs: 0
 
     - name: 删除自动发布的旧固件
       uses: shidahuilang/delete-older-releases@main
