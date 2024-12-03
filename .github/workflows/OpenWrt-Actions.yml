@@ -367,6 +367,8 @@ jobs:
     - name: 删除运行记录
       uses: Mattraks/delete-workflow-runs@v2
       with:
+        token: ${{ secrets.GIT_USER_TOKEN }}
+        repository: ${{ github.repository }}
         retain_days: 1     #保留最后多少记录不删除
         keep_minimum_runs: 0
 
